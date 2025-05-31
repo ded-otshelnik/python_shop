@@ -1,0 +1,34 @@
+[project]
+name = "python-shop"
+version = "0.0.0dev"
+authors = [
+  {name = "Andrey Budnikov"}
+]
+
+description = "An app for interacting with mass spectrometry database"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E.*"]
+keywords = ["python", "Django"]
+classifiers = [
+    "Framework :: Django",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3"
+]
+
+
+[tool.black]
+line-length = 91
+check = true
+verbose = true
+diff = true
+color = true
+
+[tool.flake8]
+max-line-length = 91
+extend-ignore = [
+    "E203",  # Whitespace before ':'
+    "W503",  # Line break before binary operator
+    "F401"   # Unused imports
+]
