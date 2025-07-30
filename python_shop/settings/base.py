@@ -15,15 +15,6 @@ import yaml
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load configuration from YAML file
-config_data: dict = yaml.safe_load(open(BASE_DIR / ".env/config.yaml", "r"))
-
-SECRET_KEY = config_data.get("SECRET_KEY")
-
-DEBUG = config_data.get("DEBUG", False)
-
-ALLOWED_HOSTS = config_data.get("ALLOWED_HOSTS", [])
-
 
 # Application definition
 
@@ -41,10 +32,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "python_shop.urls"
@@ -64,22 +53,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "shop.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config_data.get("DB_NAME"),
-        "USER": config_data.get("DB_USER"),
-        "PASSWORD": config_data.get("DB_PASSWORD"),
-        "HOST": config_data.get("DB_HOST"),
-        "PORT": config_data.get("DB_PORT"),
-    }
-}
 
 
 # Password validation
@@ -100,6 +76,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "shop.UserProfile"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
