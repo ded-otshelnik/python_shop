@@ -4,18 +4,20 @@ from django.http import (
     HttpResponseNotFound,
 )
 from .models import Product, Category
+from django.shortcuts import render
 
 
 def index(request: HttpRequest) -> HttpResponse:
     products = Product.objects.all()
-
-    return HttpResponse("\n".join([str(product) for product in products]), status=200)
+    context = {"products": products}
+    return render(request, "products.html", context)
 
 
 def product_detail(request: HttpRequest, product_id: int) -> HttpResponse:
     try:
         product = Product.objects.get(id=product_id)
-        return HttpResponse(str(product), status=200)
+        context = {"product": product}
+        return render(request, "product/product.html", context)
     except Product.DoesNotExist:
         return HttpResponseNotFound("Product not found")
 

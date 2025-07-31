@@ -12,10 +12,8 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
-
-DEBUG = env("DEBUG", True)
-
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", [])
+DEBUG = env.bool("DEBUG", default=False)
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 DATABASES = {
     "default": {
@@ -27,3 +25,4 @@ DATABASES = {
         "PORT": env("DB_PORT"),
     }
 }
+FIXTURE_ROOT = os.path.join(BASE_DIR, "fixtures")

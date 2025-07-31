@@ -9,7 +9,6 @@ repos:
     hooks:
     -   id: black
         args: [
-            --extend-exclude=python_shop/,
             --line-length=91
         ]
 -   repo: https://github.com/PyCQA/flake8
@@ -21,4 +20,5 @@ repos:
             --ignore=F401,
             --extend-ignore=F403,
             --extend-ignore=F405,
+            --extend-ignore=F841,
         ]

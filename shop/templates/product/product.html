@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Shop</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .product { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .product h3 { margin-top: 0; color: #333; }
+        .price { font-weight: bold; color: #007bff; }
+        .btn { background-color: #007bff; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ product.name }}</h1>
+        
+        <div class="product-details">
+            
+            <div class="product-info">
+                <p class="price">${{ product.price }}</p>
+                <p class="description">{{ product.description }}</p>
+                
+                {% if product.stock > 0 %}
+                    <p class="stock-status">In Stock: ${{ product.stock }}</p>
+                {% else %}
+                    <p class="stock-status out-of-stock">Out of Stock</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <a href="{% url 'shop_index' %}" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>

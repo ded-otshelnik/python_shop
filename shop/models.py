@@ -1,1 +1,2 @@
-from .user.models import UserProfile, UserProfileAdmin
+from .user.models import UserProfile
+from .user.admin import UserProfileAdmin

@@ -7,8 +7,6 @@ authors = [
 
 description = "An app for interacting with mass spectrometry database"
 readme = "README.md"
-license = "MIT"
-license-files = ["LICEN[CS]E.*"]
 keywords = ["python", "Django"]
 classifiers = [
     "Framework :: Django",
