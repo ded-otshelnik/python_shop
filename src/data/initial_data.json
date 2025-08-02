@@ -1,0 +1,316 @@
+[
+    {
+        "model": "authentication.userprofile",
+        "pk": 1,
+        "fields": {
+            "last_login": null,
+            "is_superuser": false,
+            "username": "john_lennon",
+            "password": "pbkdf2_sha256$1000000$oeoAloxgnzIEkVUJnuAPml$NSqBENAktl+CNVFLnc9CFwzq0RnE/Fx7KApwfWIciJ4=",
+            "email": "test1@test.com",
+            "is_active": true,
+            "is_staff": false,
+            "realname": "John Lennon",
+            "birthday": null,
+            "phone": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authentication.userprofile",
+        "pk": 2,
+        "fields": {
+            "last_login": "2025-08-01T11:38:03.136Z",
+            "is_superuser": false,
+            "username": "paul_mccartney",
+            "password": "pbkdf2_sha256$1000000$KLIrG5JdArzLqrMT8FIY8c$6oZILPZ5yrDZDRVqEGEzKjeYHsl0H9f3zc7uOe1Ilxw=",
+            "email": "test2@test.com",
+            "is_active": true,
+            "is_staff": false,
+            "realname": "Paul McCartney",
+            "birthday": null,
+            "phone": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authentication.userprofile",
+        "pk": 3,
+        "fields": {
+            "last_login": null,
+            "is_superuser": true,
+            "username": "george_harrison",
+            "password": "pbkdf2_sha256$1000000$KKnWTtOeexhzgKXno3VIul$cEGQBEPwQvYpnA8DXfmyektGodcjcN9fRJehLdpBfNU=",
+            "email": "test3@test.com",
+            "is_active": true,
+            "is_staff": true,
+            "realname": "George Harrison",
+            "birthday": null,
+            "phone": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "api.Category",
+        "pk": 1,
+        "fields": {
+            "name": "Electronics",
+            "description": "Electronic devices and gadgets"
+        }
+    },
+    {
+        "model": "api.Category",
+        "pk": 2,
+        "fields": {
+            "name": "Clothing",
+            "description": "Apparel and fashion items"
+        }
+    },
+    {
+        "model": "api.Category",
+        "pk": 3,
+        "fields": {
+            "name": "Books",
+            "description": "Books and literature"
+        }
+    },
+    {
+        "model": "api.Category",
+        "pk": 4,
+        "fields": {
+            "name": "Home & Garden",
+            "description": "Home improvement and gardening supplies"
+        }
+    },
+    {
+        "model": "api.Category",
+        "pk": 5,
+        "fields": {
+            "name": "Sports",
+            "description": "Sports equipment and accessories"
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 1,
+        "fields": {
+            "name": "Smartphone",
+            "description": "Latest model smartphone",
+            "price": 599.99,
+            "stock": 25,
+            "categories": [1]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 2,
+        "fields": {
+            "name": "T-Shirt",
+            "description": "Cotton t-shirt",
+            "price": 19.99,
+            "stock": 100,
+            "categories": [2]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 3,
+        "fields": {
+            "name": "Programming Book",
+            "description": "Learn Python programming",
+            "price": 39.99,
+            "stock": 50,
+            "categories": [3]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 4,
+        "fields": {
+            "name": "Garden Hose",
+            "description": "50ft garden hose",
+            "price": 29.99,
+            "stock": 30,
+            "categories": [4]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 5,
+        "fields": {
+            "name": "Basketball",
+            "description": "Professional basketball",
+            "price": 24.99,
+            "stock": 40,
+            "categories": [5]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 6,
+        "fields": {
+            "name": "Laptop",
+            "description": "Gaming laptop",
+            "price": 1299.99,
+            "stock": 15,
+            "categories": [1]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 7,
+        "fields": {
+            "name": "Jeans",
+            "description": "Blue denim jeans",
+            "price": 49.99,
+            "stock": 75,
+            "categories": [2]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 8,
+        "fields": {
+            "name": "Novel",
+            "description": "Best-selling fiction novel",
+            "price": 14.99,
+            "stock": 60,
+            "categories": [3]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 9,
+        "fields": {
+            "name": "Plant Pot",
+            "description": "Ceramic plant pot",
+            "price": 12.99,
+            "stock": 80,
+            "categories": [4]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 10,
+        "fields": {
+            "name": "Tennis Racket",
+            "description": "Professional tennis racket",
+            "price": 89.99,
+            "stock": 20,
+            "categories": [5]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 11,
+        "fields": {
+            "name": "Wireless Headphones",
+            "description": "Bluetooth wireless headphones",
+            "price": 149.99,
+            "stock": 35,
+            "categories": [1]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 12,
+        "fields": {
+            "name": "Dress",
+            "description": "Summer dress",
+            "price": 79.99,
+            "stock": 45,
+            "categories": [2]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 13,
+        "fields": {
+            "name": "Cookbook",
+            "description": "Italian cuisine cookbook",
+            "price": 24.99,
+            "stock": 40,
+            "categories": [3]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 14,
+        "fields": {
+            "name": "Lawn Mower",
+            "description": "Electric lawn mower",
+            "price": 199.99,
+            "stock": 10,
+            "categories": [4]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 15,
+        "fields": {
+            "name": "Soccer Ball",
+            "description": "FIFA approved soccer ball",
+            "price": 34.99,
+            "stock": 55,
+            "categories": [5]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 16,
+        "fields": {
+            "name": "Tablet",
+            "description": "10-inch tablet",
+            "price": 299.99,
+            "stock": 28,
+            "categories": [1]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 17,
+        "fields": {
+            "name": "Sneakers",
+            "description": "Running sneakers",
+            "price": 89.99,
+            "stock": 65,
+            "categories": [2, 5]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 18,
+        "fields": {
+            "name": "Magazine",
+            "description": "Monthly tech magazine",
+            "price": 4.99,
+            "stock": 200,
+            "categories": [3]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 19,
+        "fields": {
+            "name": "Fertilizer",
+            "description": "Organic plant fertilizer",
+            "price": 18.99,
+            "stock": 90,
+            "categories": [4]
+        }
+    },
+    {
+        "model": "api.Product",
+        "pk": 20,
+        "fields": {
+            "name": "Gym Membership",
+            "description": "Monthly gym membership",
+            "price": 39.99,
+            "stock": 1000,
+            "categories": [5]
+        }
+    }
+]

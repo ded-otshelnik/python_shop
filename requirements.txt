@@ -1,0 +1,12 @@
+Django
+djangorestframework
+django-extensions
+django-unfold
+drf-spectacular
+django-oauth-toolkit
+django-filter
+psycopg-binary
+psycopg
+django-environ
+django-allauth
+gunicorn

@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="header">
+    <h1>Welcome to Our Shop</h1>
+</div>
+<div class="container">
+    <p>Explore our wide range of products and find what you love!</p>
+    <a href="{% url 'catalog' %}" class="btn btn-primary">View Catalog</a>
+</div>
+{% endblock %}
