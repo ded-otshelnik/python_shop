@@ -13,6 +13,8 @@ class UserProfileAdmin(ModelAdmin):
                 obj = form.save(commit=False)
                 obj.set_password(form.cleaned_data["password"])
                 obj.save()
-                self.message_user(request, "User created successfully", messages.SUCCESS)
+                self.message_user(
+                    request, "User created successfully", messages.SUCCESS
+                )
         except ValidationError as exc:
             self.message_user(request, str(exc), messages.ERROR)

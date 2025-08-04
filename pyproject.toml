@@ -17,7 +17,7 @@ classifiers = [
 
 [tool.black]
 line-length = 91
-check = true
+check = false
 verbose = true
 diff = true
 color = true

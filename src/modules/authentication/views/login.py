@@ -6,6 +6,7 @@ from django.views.decorators.http import require_http_methods, require_GET
 
 from ..forms import LoginForm
 
+
 @login_required
 @require_GET
 def get_user(request: HttpRequest):
@@ -33,6 +34,8 @@ def sign_in(request: HttpRequest):
             if user is not None:
                 login(request, user)
                 # Redirect to a success page.
+                if request.GET.get("next"):
+                    return HttpResponseRedirect(request.GET.get("next"))
                 return HttpResponseRedirect("/api/shop")
 
         form.add_error(None, "Invalid credentials")
@@ -40,11 +43,9 @@ def sign_in(request: HttpRequest):
         form = LoginForm(None)
     return render(request, "authentication/login.html", {"form": form})
 
+
 @require_GET
 def logout_view(request: HttpRequest):
-    """
-    Log out the user.
-    """
     if request.user.is_authenticated:
         logout(request)
     return HttpResponseRedirect("/api/shop")

@@ -5,10 +5,8 @@ import environ
 
 env = environ.Env(
     # default value
-
     DEBUG=(bool, True),
     ALLOWED_HOSTS=(str, "*"),
-
     SQL_ENGINE=(str, "django.db.backends.sqlite3"),
     SQL_DATABASE=(str, "db.sqlite3"),
     SQL_USER=(str, "user"),
@@ -24,7 +22,7 @@ environ.Env.read_env(os.path.join(ENV_PATH, ".env.dev"))
 SECRET_KEY = env("SECRET_KEY")
 
 # Debug mode
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 from .settings_base import *
 
@@ -46,8 +44,7 @@ DATABASES = {
     }
 }
 
-#STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / "static"
 
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False

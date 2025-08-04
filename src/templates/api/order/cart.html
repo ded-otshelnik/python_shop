@@ -1,0 +1,59 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'api/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="cart-container">
+        <div class="container">
+            <h1 class="cart-title text-center">🛒 Shopping Cart</h1>
+            {% if cart.cartitem_set.all %}
+                <div class="cart-card p-4">
+                    <div class="table-responsive cart-table">
+                        <table class="table table-striped table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>🛍️ Product</th>
+                                    <th>📦 Quantity</th>
+                                    <th>💰 Price</th>
+                                    <th>💳 Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.cartitem_set.all %}
+                                    <tr>
+                                        <td class="fw-bold price-text">{{ item.product.name }}</td>
+                                        <td class="price-text">{{ item.quantity }}</td>
+                                        <td class="price-text">${{ item.product.price|floatformat:2 }}</td>
+                                        <td class="fw-bold price-text">${{ item.total_price|floatformat:2 }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="total-section">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="mb-0">🎯 Grand Total:</h3>
+                            <h3 class="mb-0 total-price">${{ cart.total_price|floatformat:2 }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <h3 class="text-muted mb-3">Your cart is empty</h3>
+                    <p class="text-muted mb-4">Discover amazing products and start shopping!</p>
+                    <a href="{% url 'catalog' %}" class="btn btn-primary shop-btn">
+                        ✨ Start Shopping
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

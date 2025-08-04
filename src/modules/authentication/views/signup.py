@@ -23,7 +23,7 @@ def create_user(request: HttpRequest):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
             user.save()
-            
+
             # Check if the user is created successfully
             user = authenticate(
                 username=user.username, password=form.cleaned_data["password"]

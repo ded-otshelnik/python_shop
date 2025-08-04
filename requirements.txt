@@ -2,7 +2,6 @@ Django
 djangorestframework
 django-extensions
 django-unfold
-drf-spectacular
 django-oauth-toolkit
 django-filter
 psycopg-binary

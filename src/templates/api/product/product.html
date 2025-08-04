@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'api/css/styles.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -17,6 +17,7 @@
         <tr>
             <td class="label">Categories:</td>
             <td class="value">{{ categories }}</td>
+        </tr>
         <tr>
             <td class="label">Price:</td>
             <td class="value">${{ product.price }}</td>
@@ -33,6 +34,14 @@
                 {% else %}
                 <p class="out-of-stock">Out of Stock</p>
                 {% endif %}
+        </tr>
+        <tr>
+            <td class="label">Add to Cart:</td>
+            <td class="value">
+                <form method="post" action="{% url 'product_detail' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                </form>
             </td>
         </tr>
     </table>

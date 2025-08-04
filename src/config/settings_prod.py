@@ -15,13 +15,14 @@ environ.Env.read_env(os.path.join(ENV_PATH, ".env.prod"))
 SECRET_KEY = env("SECRET_KEY")
 
 # Debug mode
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 from .settings_base import *
 
 # Allowed hosts
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
+# Static files (CSS, JavaScript, Images)
 STATIC_ROOT = BASE_DIR / "static"
 
 # Email backend (SMTP)
@@ -38,7 +39,7 @@ DATABASES = {
         "NAME": env("SQL_DATABASE"),
         "USER": env("SQL_USER"),
         "PASSWORD": env("SQL_PASSWORD"),
-        "HOST": "db",
+        "HOST": env("SQL_HOST"),
         "PORT": env("SQL_PORT"),
     }
 }
@@ -47,6 +48,6 @@ DATABASES = {
 SECURE_HSTS_SECONDS = 31536000  # Use HTTP Strict Transport Security (HSTS)
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

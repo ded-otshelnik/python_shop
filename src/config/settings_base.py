@@ -1,4 +1,4 @@
- # API + Unfold settings
+# API + Unfold settings
 import os
 from pathlib import Path
 
@@ -20,12 +20,9 @@ INSTALLED_APPS = [
     "unfold.contrib.simple_history",  # optional, if django-simple-history package is used
     "unfold.contrib.location_field",  # optional, if django-location-field package is used
     "unfold.contrib.constance",  # optional, if django-constance package is used
-
-    
     # Internal
     "modules.api",
     "modules.authentication",
-    
     # Django default
     "django.contrib.admin",
     "django.contrib.auth",
@@ -33,30 +30,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # External
-    "rest_framework",
-    "drf_spectacular",
     "django_extensions",
 ]
-
-# Docs config
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-
-SPECTACULAR_SETTINGS = {
-    "TITLE": "MyAPI",
-    "DESCRIPTION": "MyAPI Documentation",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
-}
 
 # Admin Unfold theme config
 UNFOLD = {
     "SITE_TITLE": "Django Admin Site",
     "SITE_HEADER": "Django Admin Site",
-    "SITE_URL": "127.0.0.1:8000/api/shop/", 
+    "SITE_URL": "127.0.0.1:8000/api/shop/",
     # "SITE_ICON": lambda request: static("icon.svg"),  # both modes, optimise for 32px height
     "SITE_ICON": {
         "light": lambda request: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=ads_click",  # light mode
@@ -86,18 +68,6 @@ UNFOLD = {
                 "separator": True,  # Top border
                 "collapsible": False,  # Collapsible group of links
                 "items": [
-                    # {
-                    #     "title": _("Users"),
-                    #     "icon": "people", # Supported icon set: https://fonts.google.com/icons
-                    #     "link": "/dashboard/auth/user/",
-                    #     "permission": lambda request: request.user.is_superuser,
-                    # },
-                    # {
-                    #     "title": _("Groups"),
-                    #     "icon": "group",
-                    #     "link": "/dashboard/auth/group/",
-                    #     "permission": lambda request: request.user.is_superuser,
-                    # },
                     {
                         "title": _("Home"),
                         "icon": "dashboard",
@@ -157,10 +127,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "authentication.UserProfile"
 
+LOGIN_URL = "/auth/login/"
+LOGOUT_URL = "/auth/logout/"
+
 ROOT_URLCONF = "config.urls"
 
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
+STATIC_URL = "static/"
+MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Internationalization

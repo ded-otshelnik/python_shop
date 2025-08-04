@@ -16,7 +16,9 @@ class SignupForm(UserCreationForm):
             ),
             "email": forms.EmailInput(attrs={"placeholder": "Email", "required": True}),
             "realname": forms.TextInput(attrs={"placeholder": "Real Name"}),
-            "birthday": forms.DateInput(attrs={"placeholder": "Birthday", "type": "date"}),
+            "birthday": forms.DateInput(
+                attrs={"placeholder": "Birthday", "type": "date"}
+            ),
             "phone": forms.TextInput(attrs={"placeholder": "Phone Number"}),
         }
 

@@ -6,4 +6,3 @@ admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.site_header = "Python Shop Admin"
 admin.site.site_title = "Python Shop Admin Portal"
 admin.site.index_title = "Welcome to the Python Shop Admin Portal"
-

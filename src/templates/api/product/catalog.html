@@ -3,12 +3,12 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'api/css/styles.css' %}">
 {% endblock %}
 
 
 {% block extra_js %}
-    <script src="{% static 'js/toggleDropdown.js' %}"></script>
+    <script src="{% static 'api/js/toggleDropdown.js' %}"></script>
 {% endblock %}
 
 {% block title %}
@@ -17,7 +17,7 @@
 
 {% block content %}
 <div class="container">
-    <h2>Catalog</h2>
+    <h2 class="cart-title">Catalog</h2>
 
     <div class="categories">
         {% for category in categories %}
