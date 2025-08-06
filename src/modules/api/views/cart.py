@@ -7,9 +7,6 @@ from utils.logging import Logger
 from ..models import Cart, Product
 
 
-log = Logger.get_instance()
-
-
 @login_required
 def get_cart(request: HttpRequest) -> HttpResponse:
     cart = Cart.objects.filter(user=request.user).first()
@@ -29,4 +26,4 @@ def add_to_cart(request: HttpRequest, product_id: int) -> HttpResponse:
 
     cart.add_or_increment(product)
 
-    return redirect(f"/api/shop/products/{product_id}/", request=request)
+    return redirect(f"/catalog/{product_id}/", request=request)

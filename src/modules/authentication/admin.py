@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import UserProfile, UserProfileAdmin
+from allauth.account.decorators import secure_admin_login
 
 # Register your models here.
 admin.site.register(UserProfile, UserProfileAdmin)

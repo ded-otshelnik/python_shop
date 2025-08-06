@@ -14,10 +14,10 @@ class Cart(models.Model):
         )
 
     def __str__(self):
-        return f"Cart of {self.user.username} created at {self.created_at}"
+        return f"Cart of user {self.user.email} created at {self.created_at}"
 
     def __repr__(self):
-        return f"Cart(user={self.user.username}, created_at={self.created_at})"
+        return f"Cart(user={self.user.email}, created_at={self.created_at})"
 
     def add_or_increment(self, product):
         cart_item, created = CartItem.objects.get_or_create(

@@ -45,41 +45,43 @@ A simple Python shop application built with Django
     python manage.py createsuperuser
     ```
 
-6. Start the development server:
+6. Set environment variables:
+
+    Create a `.env.conf` file in the `src/config/` directory and add the following line:
+
+    ```env
+    DJANGO_ENV=dev
+    ```
+
+7. Start the development server:
 
     ```bash
-    python manage.py runserver
+    python src/bin/manage.py runserver
     ```
 
 The application will be available at `http://localhost:8000`
 
-## API Endpoints
+## Web API Endpoints
 
 ### Products & Categories
 
-- `GET /api/products/` - List catalog
-- `GET /api/products/{id}/` - Get product details
-- `POST /api/products/` - Create new product (admin only)
-- `PUT /api/products/{id}/` - Update product (admin only)
-- `DELETE /api/products/{id}/` - Delete product (admin only)
-- `GET /api/categories/{id}/` - Get category details
+- `GET /catalog/` - Catalog of products ordered by categories
+- `GET /catalog/{id}/` - Product details by ID
+- `GET /categories/{id}/` - Products in a specific category
 
 ### Cart
 
-- `GET /api/cart/` - Get user's cart
-- `POST /api/cart/add/` - Add item to cart
-- `PUT /api/cart/update/{id}/` - Update cart item quantity
-- `DELETE /api/cart/remove/{id}/` - Remove item from cart
+- `GET /cart/` - Get user's cart
+- `POST /cart/{id}` - Add item to user's cart
 
 ### Orders
 
-- `GET /api/orders/` - List user's orders
-- `POST /api/orders/` - Create new order
-- `GET /api/orders/{id}/` - Get order details
+- `GET /orders/` - List user's orders
+- `POST /orders/` - Create new order
+- `GET /orders/{id}/` - Get order details
 
 ### Authentication
 
-- `POST /api/auth/register/` - User registration
-- `POST /api/auth/login/` - User login
-- `POST /api/auth/logout/` - User logout
-- `GET /api/auth/profile/` - Get user profile
+- `POST /auth/login/` - User login
+- `POST /auth/signup/` - User registration
+- `GET /auth/profile/` - Get user profile

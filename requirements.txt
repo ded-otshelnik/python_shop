@@ -7,5 +7,7 @@ django-filter
 psycopg-binary
 psycopg
 django-environ
+django-allauth[socialaccount]
 django-allauth
 gunicorn
+django-cors-headers

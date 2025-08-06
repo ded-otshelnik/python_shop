@@ -5,16 +5,13 @@
         "fields": {
             "last_login": null,
             "is_superuser": false,
-            "username": "john_lennon",
+            "email": "john_lennon@test.com",
             "password": "pbkdf2_sha256$1000000$oeoAloxgnzIEkVUJnuAPml$NSqBENAktl+CNVFLnc9CFwzq0RnE/Fx7KApwfWIciJ4=",
-            "email": "test1@test.com",
             "is_active": true,
             "is_staff": false,
             "realname": "John Lennon",
             "birthday": null,
-            "phone": null,
-            "groups": [],
-            "user_permissions": []
+            "phone": null
         }
     },
     {
@@ -23,16 +20,13 @@
         "fields": {
             "last_login": "2025-08-01T11:38:03.136Z",
             "is_superuser": false,
-            "username": "paul_mccartney",
+            "email": "paul_mccartney@test.com",
             "password": "pbkdf2_sha256$1000000$KLIrG5JdArzLqrMT8FIY8c$6oZILPZ5yrDZDRVqEGEzKjeYHsl0H9f3zc7uOe1Ilxw=",
-            "email": "test2@test.com",
             "is_active": true,
             "is_staff": false,
             "realname": "Paul McCartney",
             "birthday": null,
-            "phone": null,
-            "groups": [],
-            "user_permissions": []
+            "phone": null
         }
     },
     {
@@ -41,16 +35,13 @@
         "fields": {
             "last_login": null,
             "is_superuser": true,
-            "username": "george_harrison",
+            "email": "george_harrison@test.com",
             "password": "pbkdf2_sha256$1000000$KKnWTtOeexhzgKXno3VIul$cEGQBEPwQvYpnA8DXfmyektGodcjcN9fRJehLdpBfNU=",
-            "email": "test3@test.com",
             "is_active": true,
             "is_staff": true,
             "realname": "George Harrison",
             "birthday": null,
-            "phone": null,
-            "groups": [],
-            "user_permissions": []
+            "phone": null
         }
     },
     {

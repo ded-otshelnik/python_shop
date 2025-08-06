@@ -272,3 +272,14 @@
    transform: translateY(-3px);
    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
+
+/* =============================================================================
+  AUTHENTICATION STYLES
+  ============================================================================= */
+
+.card {
+   padding: 15px;
+   border: 1px solid #dee2e6;
+   border-radius: 15px;
+   background-color: #f8f9fa;
+}

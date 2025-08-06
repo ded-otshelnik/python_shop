@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-from unfold.admin import ModelAdmin
+from django.contrib.admin import ModelAdmin
 
 
 class UserProfileAdmin(ModelAdmin):
