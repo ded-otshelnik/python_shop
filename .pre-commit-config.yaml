@@ -1,4 +1,7 @@
-exclude: 'src/config/'
+# .pre-commit-config.yaml
+# See https://pre-commit.com for more information.
+
+exclude: 'app/src/config/'
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -9,6 +12,10 @@ repos:
     hooks:
     -   id: black
         args: [
+            app,
+            --verbose,
+            --diff,
+            --color,
             --line-length=91
         ]
 -   repo: https://github.com/PyCQA/flake8

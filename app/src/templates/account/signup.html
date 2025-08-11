@@ -1,0 +1,104 @@
+{% extends "base_generic.html" %}
+{% load socialaccount %}
+
+{% block title %}Sign Up - Shop{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0 text-center">Create Account</h3>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Please correct the errors below.
+                            </div>
+                        {% endif %}
+                        <div class="mb-4">
+                            {% for fm in form %}
+                            <div class="mb-3">
+                                {% if fm.field.widget.input_type == 'password' %}
+                                    <input type="password" class="form-control form-control-lg border-2" id="{{ fm.id_for_label }}" name="{{ fm.name }}" placeholder="Enter {{ fm.label|lower }}" value="{{ fm.value|default:'' }}" required>
+                                {% elif fm.field.widget.input_type == 'email' %}
+                                    <input type="email" class="form-control form-control-lg border-2" id="{{ fm.id_for_label }}" name="{{ fm.name }}" placeholder="Enter {{ fm.label|lower }}" value="{{ fm.value|default:'' }}" required>
+                                {% elif fm.field.widget.input_type == 'checkbox' %}
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="{{ fm.id_for_label }}" name="{{ fm.name }}" {% if fm.value %}checked{% endif %}>
+                                        <label class="form-check-label" for="{{ fm.id_for_label }}">{{ fm.label }}</label>
+                                    </div>
+                                {% elif fm.field.widget.input_type == 'date' %}
+                                    <input type="date" class="form-control form-control-lg border-2" id="{{ fm.id_for_label }}" name="{{ fm.name }}" required>
+                                {% else %}
+                                    <input type="text" class="form-control form-control-lg border-2" id="{{ fm.id_for_label }}" name="{{ fm.name }}" placeholder="Enter {{ fm.label|lower }}" required>
+                                {% endif %}
+                                {% if fm.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        {{ fm.errors|striptags }}
+                                    </div>
+                                {% endif %}
+                                {% if fm.help_text %}
+                                    <div class="form-text text-muted small">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        {{ fm.help_text }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                            <input type="hidden" name="next" value="{% url 'shop_index' %}">
+                        </div>
+                        <div class="mt-3 text-center">
+                            <p class="mb-0 text-muted">Already have an account? 
+                                <a href="{% url 'account_login' %}" class="text-primary fw-semibold text-decoration-none">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Login
+                                </a>
+                            </p>
+                        </div>
+                        {% get_providers as socialaccount_providers %}
+                        {% if socialaccount_providers %}
+                            <div class="mt-4 text-center">
+                                <p class="mb-3 text-muted">Or sign up with:</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    {% for provider in socialaccount_providers %}
+                                        <a href="{% provider_login_url provider.id %}" class="btn btn-sm d-flex align-items-center
+                                        {% if provider.id == 'google' %}
+                                            btn-outline-secondary
+                                        {% elif provider.id == 'yandex' %}
+                                            btn-danger
+                                        {% else %}
+                                            btn-outline-dark
+                                        {% endif %}">
+                                            {% if provider.id == 'google' %}
+                                                <img src="https://www.google.com/favicon.ico" width="16" height="16" class="me-1">
+                                            {% elif provider.id == 'yandex' %}
+                                                <img src="https://yandex.com/favicon.ico" width="16" height="16" class="me-1">
+                                            {% elif provider.id == 'github' %}
+                                                <i class="fab fa-github me-1"></i>
+                                            {% elif provider.id == 'facebook' %}
+                                                <i class="fab fa-facebook me-1"></i>
+                                            {% else %}
+                                                <i class="fab fa-{{ provider.id }} me-1"></i>
+                                            {% endif %}
+                                            {{ provider.name }}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

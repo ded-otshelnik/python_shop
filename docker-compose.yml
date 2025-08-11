@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: db
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
@@ -7,32 +8,32 @@ services:
       - .env.prod.db
 
   web:
-    build: .
-    command: ./src/bin/run.sh
+    container_name: web
+    build: ./app
     volumes:
-      - .:/app
+      - static_volume:/app/src/static
     ports:
       - 8000:8000
-    env_file:
-      - .env.prod
     expose:
-      - "8000"
+      - 8000
     depends_on:
       - db
     
   nginx:
-    image: nginx:1.19.6-alpine
+    container_name: nginx
+    build: ./nginx
     depends_on:
       - web
+    restart: always
     ports:
-      - "80:80"
-    expose:
-      - "80"
-      - "443"
+      - 443:443
+      - 80:80
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - nginx_static:/src/static
+      - certs:/etc/nginx/certs
+      - static_volume:/app/src/static
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
 
 volumes:
   postgres_data:
-  nginx_static:
+  static_volume:
+  certs:

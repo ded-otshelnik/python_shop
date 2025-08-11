@@ -1,0 +1,14 @@
+Django
+djangorestframework
+django-extensions
+django-unfold
+django-oauth-toolkit
+django-filter
+psycopg-binary
+psycopg
+django-environ
+django-allauth[socialaccount]
+gunicorn
+django-cors-headers
+Werkzeug
+pyOpenSSL
