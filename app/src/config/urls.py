@@ -11,7 +11,7 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),  # Django Admin Site
     # Including a new module
-    path("", include("modules.api.urls")),
+    path("", include("modules.web.urls")),
     path("auth/", include("modules.authentication.urls")),
     path("auth/", include("allauth.urls")),
     path("auth/social/", include("allauth.socialaccount.urls")),

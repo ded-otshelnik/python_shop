@@ -14,8 +14,7 @@ environ.Env.read_env(os.path.join(ENV_PATH, ".env.prod"))
 
 SECRET_KEY = env("SECRET_KEY")
 
-# Debug mode
-DEBUG = env("DEBUG")
+DEBUG = env("DEBUG", False)
 
 from .settings_base import *
 
@@ -97,3 +96,8 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     },
 }
+
+# Custom settings
+PAYMENT_GATEWAY_URL = env("PAYMENT_GATEWAY_URL")
+SSL_KEY_PATH = env("SSL_KEY_PATH")
+SSL_CERT_PATH = env("SSL_CERT_PATH")

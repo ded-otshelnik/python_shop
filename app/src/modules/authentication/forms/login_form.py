@@ -13,24 +13,18 @@ class LoginForm(AllauthLoginForm):
     def login(self, request, **kwargs):
         user = request.user
         if not user:
-            log.error("No user provided for login.")
             raise forms.ValidationError("No user provided for login.")
-        # Custom login logic can be added here if needed
-        log.info(f"Logging in user: {user.email}")
-        cleaned_data = self.clean()
-        log.debug(f"Cleaned data: {cleaned_data}")
+
         return super().login(request, user)
 
     def clean(self):
         # Custom validation logic can be added here if needed
         cleaned_data = super(LoginForm, self).clean()
+
+        # If no data is provided, raise a validation error
         if not cleaned_data:
-            # If no data is provided, raise a validation error
-            log.error("No data provided in login form.")
             self.add_error(None, "No data provided.")
             raise forms.ValidationError("No data provided.")
-        log.debug("Validating login form")
-        log.debug(f"Cleaned data: {cleaned_data}")
 
         email = cleaned_data.get("login", None)
         password = cleaned_data.get("password", None)

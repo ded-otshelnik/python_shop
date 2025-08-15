@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+    {{ category.name }}
+{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'web/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="category-header">
+        <h2 class="category-title">{{ category.name }}</h2>
+    </div>
+
+    <div class="products-grid">
+        {% for product in category.product_set.all %}
+            <div class="product-card">
+                <div class="product-info">
+                    <h3 class="product-name">
+                        <a href="{% url 'product_detail' product.id %}" class="product-link">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        {% empty %}
+            <div class="no-products">
+                <p class="no-products-message">No products available in this category.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

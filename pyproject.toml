@@ -1,0 +1,32 @@
+[project]
+name = "python-shop"
+version = "0.0.0dev"
+authors = [
+  {name = "Andrey Budnikov"}
+]
+
+description = "A Django-based e-commerce application"
+readme = "README.md"
+keywords = ["python", "Django"]
+classifiers = [
+    "Framework :: Django",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3"
+]
+
+
+[tool.black]
+line-length = 91
+verbose = true
+color = true
+
+[tool.flake8]
+max-line-length = 91
+extend-ignore = [
+    "E203",  # Whitespace before ':'
+    "W503",  # Line break before binary operator
+    "F401",   # Unused imports
+    "F403",   # 'from module import *' used; unable to detect undefined names
+    "F405",   # Name may be undefined, or defined from star imports: module
+    "F841",   # Local variable is assigned to but never used
+]

@@ -1,5 +1,5 @@
-from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
+from allauth.account.models import EmailAddress
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 from utils import Logger
@@ -7,21 +7,23 @@ from utils import Logger
 log = Logger.get_instance()
 
 
-class AccountAdapter(DefaultSocialAccountAdapter):
+class SocialAccountAdapter(DefaultSocialAccountAdapter):
     def new_user(self, request, sociallogin):
         User = get_user_model()
         return User()
 
-    def _extract_email(self, data):
-        # Google case
-        if "email" in data:
-            return data["email"]
+    def _extract_email(self, account):
+        data = account.extra_data
 
-        # Yandex case
-        elif "default_email" in data:
-            return data["default_email"]
-        elif "emails" in data and isinstance(data["emails"], list):
-            return data["emails"][0]
+        if account.provider == "google":
+            if "email" in data:
+                return data["email"]
+
+        elif account.provider == "yandex":
+            if "default_email" in data:
+                return data["default_email"]
+            elif "emails" in data and isinstance(data["emails"], list):
+                return data["emails"][0]
 
         raise ValueError("Email not found in social login data")
 
@@ -29,7 +31,7 @@ class AccountAdapter(DefaultSocialAccountAdapter):
         """
         Override to ensure email address is created for the user.
         """
-        email = self._extract_email(sociallogin.account.extra_data)
+        email = self._extract_email(sociallogin.account)
 
         verified = sociallogin.account.extra_data.get("verified_email", True)
         primary = sociallogin.account.extra_data.get("primary", True)
@@ -37,31 +39,37 @@ class AccountAdapter(DefaultSocialAccountAdapter):
             user=sociallogin.user, email=email, verified=verified, primary=primary
         )
 
-    def _extract_name(self, data):
+    def _extract_name(self, account):
         """
         Extracts the name from the social login data.
         """
+        data = account.extra_data
         if "name" in data:
             return data["name"]
         elif "real_name" in data:
             return data["real_name"]
 
         # Yandex case
-        elif "first_name" in data and "last_name" in data:
-            return f"{data['first_name']} {data['last_name']}"
+        if account.provider == "yandex":
+            if "first_name" in data and "last_name" in data:
+                return f"{data['first_name']} {data['last_name']}"
 
         # Google case
-        elif "given_name" in data and "family_name" in data:
-            return f"{data['given_name']} {data['family_name']}"
-        return ""
+        elif account.provider == "google":
+            if "given_name" in data and "family_name" in data:
+                return f"{data['given_name']} {data['family_name']}"
+
+        # Default case
+        return "No real name"
 
     def populate_user(self, request, sociallogin, data):
         """
         Override to populate the user with additional data.
         """
         user = sociallogin.user
-        user.email = self._extract_email(data)
-        user.realname = self._extract_name(data)
+        account = sociallogin.account
+        user.email = self._extract_email(account)
+        user.realname = self._extract_name(account)
 
         return user
 

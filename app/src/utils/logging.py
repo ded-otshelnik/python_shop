@@ -16,9 +16,9 @@ class Logger:
     _instance = None
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls, name=None):
         if cls._instance is None:
-            cls._instance = logging.getLogger("python_shop")
+            cls._instance = logging.getLogger(name)
             cls._instance.setLevel(logging.DEBUG)
             handler = logging.StreamHandler()
             handler.setFormatter(CustomFormatter())

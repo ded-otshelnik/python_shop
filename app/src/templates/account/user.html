@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+{% block title %}User Profile{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row justify-content-center"></div>
@@ -19,7 +21,18 @@
                                 <td class="fw-bold">Real name</td>
                                 <td>{{ user.realname }}</td>
                             </tr>
+                            <tr>
+                                <td class="fw-bold">Total Orders</td>
+                                <td>{{ user.orders.count }}</td>
+                            </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <a href="{% url 'order_history' %}" class="btn btn-primary">Order history</a>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

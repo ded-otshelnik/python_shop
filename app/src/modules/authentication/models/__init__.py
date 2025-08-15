@@ -1,3 +1,9 @@
 from .user import UserProfile
 from .admin import UserProfileAdmin
-from .allauth import AccountAdapter
+from .allauth import SocialAccountAdapter
+
+__all__ = [
+    "UserProfile",
+    "UserProfileAdmin",
+    "SocialAccountAdapter",
+]

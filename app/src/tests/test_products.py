@@ -6,7 +6,7 @@ try:
     from bs4 import BeautifulSoup
 except ImportError:
     BeautifulSoup = None
-from modules.api.models import Category, Product
+from modules.web.models import Category, Product
 from modules.authentication.models import UserProfile as User
 
 
@@ -89,6 +89,10 @@ class TestCatalogView(TestCase):
         # Check for JS
         assert "api/js/toggleDropdown.js" in content
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_title_is_correct(self):
         """Test that the page title is correct"""
         url = reverse("catalog")
@@ -102,6 +106,10 @@ class TestCatalogView(TestCase):
         h2_title = soup.find("h2", class_="cart-title")
         assert h2_title and h2_title.get_text().strip() == "Catalog"
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_displays_categories(self):
         """Test that categories are displayed correctly"""
         url = reverse("catalog")
@@ -122,6 +130,10 @@ class TestCatalogView(TestCase):
         assert "Clothing" in category_names
         assert "Empty Category" in category_names
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_displays_products_in_categories(self):
         """Test that products are displayed within their categories"""
         url = reverse("catalog")
@@ -147,6 +159,10 @@ class TestCatalogView(TestCase):
         assert "T-Shirt" in product_names
         assert "Jeans" in product_names
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_product_links_are_correct(self):
         """Test that product links have correct URLs"""
         url = reverse("catalog")
@@ -166,6 +182,10 @@ class TestCatalogView(TestCase):
                 "/catalog/" in href or "product_detail" in href
             )  # Adjust based on your URL pattern
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_category_view_all_links(self):
         """Test that 'View All' links are present and correct"""
         url = reverse("catalog")
@@ -181,6 +201,10 @@ class TestCatalogView(TestCase):
             href = link.get("href")
             assert href and "categories" in href
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_empty_category_message(self):
         """Test that empty categories show appropriate message"""
         url = reverse("catalog")
@@ -194,6 +218,10 @@ class TestCatalogView(TestCase):
         empty_messages = soup.find_all("li", string="No products in this category")
         assert len(empty_messages) == 1  # Should have one empty category
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_dropdown_functionality_attributes(self):
         """Test that dropdown elements have correct attributes for functionality"""
         url = reverse("catalog")
@@ -212,6 +240,10 @@ class TestCatalogView(TestCase):
             style = content.get("style")
             assert "display: none" in style
 
+    @pytest.mark.skipif(
+        BeautifulSoup is None,
+        reason="BeautifulSoup is not available, skipping HTML structure tests",
+    )
     def test_catalog_html_structure(self):
         """Test the overall HTML structure of the catalog page"""
         url = reverse("catalog")

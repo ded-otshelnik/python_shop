@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS python_shop;
+CREATE DATABASE IF NOT EXISTS python_shop_payments;

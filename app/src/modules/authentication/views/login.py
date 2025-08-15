@@ -39,7 +39,7 @@ def sign_in(request: HttpRequest):
             return HttpResponseRedirect("/")
     else:
         form = LoginForm(None)
-    return render(request, "authentication/login.html", {"form": form})
+    return render(request, "account/login.html", {"form": form})
 
 
 @require_GET

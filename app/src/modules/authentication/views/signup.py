@@ -27,4 +27,4 @@ def create_user(request: HttpRequest):
             return HttpResponseRedirect("/")
     else:
         form = SignupForm(None)
-    return render(request, "authentication/signup.html", {"form": form})
+    return render(request, "account/signup.html", {"form": form})

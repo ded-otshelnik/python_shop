@@ -1,0 +1,15 @@
+Django
+django-environ
+django-extensions
+django-filter
+psycopg-binary
+psycopg
+djangorestframework
+drf-spectacular
+django-cors-headers
+BeautifulSoup4
+django-environ
+gunicorn
+Werkzeug
+pyOpenSSL
+simplejson

@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
     # Internal
-    "modules.api",
+    "modules.web",
     "modules.authentication",
     # Django default
     "django.contrib.admin",
@@ -114,7 +114,12 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+ACCOUNT_FORMS = {
+    "signup": "modules.authentication.forms.SignupForm",
+    "login": "modules.authentication.forms.LoginForm",
+}
+
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
 SOCIALACCOUNT_LOGIN_ON_GET = True
-SOCIALACCOUNT_ADAPTER = "modules.authentication.models.AccountAdapter"
+SOCIALACCOUNT_ADAPTER = "modules.authentication.models.SocialAccountAdapter"

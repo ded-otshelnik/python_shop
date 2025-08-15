@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import environ
 
+from .settings_base import *
+
 env = environ.Env(
     # default value
     DEBUG=(bool, True),
@@ -24,8 +26,6 @@ SECRET_KEY = env("SECRET_KEY")
 # Debug mode
 DEBUG = env("DEBUG")
 
-from .settings_base import *
-
 # Allowed hosts
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 
@@ -44,7 +44,8 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -91,3 +92,8 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     },
 }
+
+# Custom settings
+PAYMENT_GATEWAY_URL = env("PAYMENT_GATEWAY_URL")
+CERT_PUBLIC_KEY_PATH = env("CERT_PUBLIC_KEY_PATH")
+CERT_PRIVATE_KEY_PATH = env("CERT_PRIVATE_KEY_PATH")
