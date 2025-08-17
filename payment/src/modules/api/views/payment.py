@@ -5,10 +5,11 @@ from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema
 
 from ..models import Payment
+from ..serializers import PaymentSerializer
 
 from utils import Logger
 
-log = Logger.get_instance()
+log = Logger.get_instance("payment")
 
 
 class PaymentAPIView(APIView):
@@ -23,7 +24,6 @@ class PaymentAPIView(APIView):
         Handle POST requests to create a new payment.
         """
         payment_info = request.data
-        log.debug(f"Received payment info: {payment_info}")
         if not payment_info:
             return Response(
                 {"error": "Payment info is not provided"},
@@ -31,9 +31,9 @@ class PaymentAPIView(APIView):
             )
         # Simulate processing time
         time.sleep(1)
+
         payment = Payment.objects.create(**payment_info)
         payment.save()
-        log.debug(f"Payment created: {payment.id}")
 
         return Response(
             {
@@ -56,12 +56,13 @@ class PaymentAPIView(APIView):
         payment_id = request.query_params.get("payment_id", None)
         if not payment_id:
             return Response(
-                json={"error": "Payment ID not provided"}, status=status.HTTP_404_NOT_FOUND
+                {"error": "Payment ID not provided"}, status=status.HTTP_404_NOT_FOUND
             )
         try:
             payment = Payment.objects.get(id=payment_id)
-            return Response(json={"payment": payment.to_dict()}, status=status.HTTP_200_OK)
+            payment = PaymentSerializer(payment)
+            return Response({"payment_info": payment.data}, status=status.HTTP_200_OK)
         except Payment.DoesNotExist:
             return Response(
-                json={"error": "Payment not found"}, status=status.HTTP_404_NOT_FOUND
+                {"error": "Payment not found"}, status=status.HTTP_404_NOT_FOUND
             )

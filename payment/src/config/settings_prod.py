@@ -1,6 +1,6 @@
 # Production settings
 import os
-from pathlib import Path
+import logging
 import environ
 
 env = environ.Env(
@@ -14,8 +14,11 @@ environ.Env.read_env(os.path.join(ENV_PATH, ".env.prod"))
 
 SECRET_KEY = env("SECRET_KEY")
 
+
 # Debug mode
 DEBUG = env("DEBUG")
+
+LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
 from .settings_base import *
 

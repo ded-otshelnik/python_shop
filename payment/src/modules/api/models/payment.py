@@ -29,6 +29,7 @@ class PaymentManager(models.Manager):
             status=PaymentStatus.COMPLETED,
             payment_method=payment_method,
         )
+        payment.save()
         return payment
 
 

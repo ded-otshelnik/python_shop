@@ -37,8 +37,14 @@ class CheckoutView(TemplateView):
     @method_decorator(login_required)
     def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         context = self.get_context_data(request)
+
+        cart = context.get("cart")
+        if not cart:
+            return HttpResponseNotFound("Cart not found")
+
         form = CheckoutForm(request.POST)
         payment = None
+
         if form.is_valid():
             cleaned_data = form.cleaned_data
 
@@ -61,9 +67,9 @@ class CheckoutView(TemplateView):
                 messages.error(request, f"Payment service unavailable: {str(e)}")
                 return self.render_to_response(context)
 
-            if response.status_code == 201:
+            if response.status_code == 201 and response.json().get("payment_id"):
                 payment = response.json()
-                log.info(f"Payment created successfully: {payment}")
+                log.debug(f"Payment created successfully: {payment}")
             else:
                 messages.error(request, f"Payment failed: {response.content}")
                 return self.render_to_response(context)
@@ -71,15 +77,10 @@ class CheckoutView(TemplateView):
             messages.error(request, "Invalid form submission. Please correct the errors.")
             return self.render_to_response(context)
 
-        cart = context.get("cart")
-        if not cart:
-            return HttpResponseNotFound("Cart not found")
-
-        order = Order.create_order(cart)
+        order = Order.objects.create(cart, payment.get("payment_id"))
         if not order:
             return HttpResponseNotFound("Order creation failed")
 
-        order.save()
         message = f"Order #{order.id} created successfully!"
         messages.success(request, message)
 

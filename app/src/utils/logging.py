@@ -1,6 +1,9 @@
 import logging
 
-logging.basicConfig(level=logging.INFO)
+from django.conf import settings
+
+
+logging.basicConfig(level=settings.LOGGING_LEVEL)
 
 
 class CustomFormatter(logging.Formatter):

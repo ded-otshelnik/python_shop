@@ -1,7 +1,9 @@
 # Production settings
 import os
-from pathlib import Path
+import logging
 import environ
+
+from .settings_base import *
 
 env = environ.Env(
     # default value
@@ -16,7 +18,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG", False)
 
-from .settings_base import *
+LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
 # Allowed hosts
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")

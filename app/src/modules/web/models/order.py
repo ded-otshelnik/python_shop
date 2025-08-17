@@ -5,10 +5,23 @@ from ...authentication.models import UserProfile
 
 
 class OrderStatus(models.TextChoices):
-    PENDING = "Pending"
     IN_PROGRESS = "In progress"
     COMPLETED = "Completed"
     CANCELED = "Canceled"
+
+
+class OrderManager(models.Manager):
+    def create(self, cart: Cart, payment_id: int) -> "Order":
+        order = Order(customer=cart.user, payment_id=payment_id)
+        order.save()
+        for item in cart.cartitem_set.all():
+            OrderItem.objects.create(
+                order=order, product=item.product, quantity=item.quantity
+            )
+
+        cart.clear_cart()
+        order.save()
+        return order
 
 
 class Order(models.Model):
@@ -21,7 +34,10 @@ class Order(models.Model):
         choices=OrderStatus.choices,
         default=OrderStatus.IN_PROGRESS,
     )
+    payment_id = models.IntegerField(editable=False, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = OrderManager()
 
     @property
     def total_price(self):
@@ -32,18 +48,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order(customer={self.customer.email}, order_date={self.order_date})"
-
-    @staticmethod
-    def create_order(cart: Cart) -> "Order":
-        order = Order(customer=cart.user)
-        order.save()
-        for item in cart.cartitem_set.all():
-            OrderItem.objects.create(
-                order=order, product=item.product, quantity=item.quantity
-            )
-
-        cart.clear_cart()
-        return order
 
 
 class OrderItem(models.Model):

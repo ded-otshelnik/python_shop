@@ -29,14 +29,13 @@ services:
     expose:
       - 8000
     depends_on:
-      - db
+      - payment
 
   nginx:
     container_name: nginx
     build: ./nginx
     depends_on:
       - web
-      - payment
     ports:
       - 443:443
       - 80:80

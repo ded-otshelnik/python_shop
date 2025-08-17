@@ -1,6 +1,6 @@
 # Development settings
 import os
-from pathlib import Path
+import logging
 import environ
 
 from .settings_base import *
@@ -23,8 +23,9 @@ environ.Env.read_env(os.path.join(ENV_PATH, ".env.dev"))
 
 SECRET_KEY = env("SECRET_KEY")
 
-# Debug mode
 DEBUG = env("DEBUG")
+
+LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
 # Allowed hosts
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")

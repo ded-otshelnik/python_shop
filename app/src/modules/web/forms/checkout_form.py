@@ -4,15 +4,15 @@ from django import forms
 class CheckoutForm(forms.Form):
     payment_method = forms.ChoiceField(
         choices=[
-            ("credit_card", "Credit Card"),
-            ("paypal", "PayPal"),
-            ("sber_pay", "Sber Pay"),
+            ("Credit Card", "Credit Card"),
+            ("PayPal", "PayPal"),
+            ("Sber Pay", "Sber Pay"),
         ]
     )
     shipping_method = forms.ChoiceField(
         choices=[
-            ("standard", "Standard Shipping"),
-            ("express", "Express Shipping"),
+            ("Standard Shipping", "Standard Shipping"),
+            ("Express Shipping", "Express Shipping"),
         ]
     )
 

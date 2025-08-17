@@ -1,5 +1,6 @@
 # Development settings
 import os
+import logging
 import environ
 
 env = environ.Env(
@@ -22,6 +23,8 @@ SECRET_KEY = env("SECRET_KEY")
 
 # Debug mode
 DEBUG = env("DEBUG")
+
+LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
 from .settings_base import *
 
