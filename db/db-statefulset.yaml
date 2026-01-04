@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-statefulset
+  namespace: python-shop
+spec:
+  selector:
+    matchLabels:
+      name: db-set
+  serviceName: db-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: db-set
+    spec:
+      containers:
+      - name: db-container
+        image: postgres:15-alpine
+        volumeMounts:
+        - name: db-pvc
+          mountPath: /var/lib/postgresql/data
+        - name: db-init-scripts
+          mountPath: /docker-entrypoint-initdb.d/
+        envFrom:
+        - configMapRef:
+            name: db-configmap
+      restartPolicy: Always
+      volumes:
+      - name: db-init-scripts
+        configMap:
+          name: db-init-scripts
+  volumeClaimTemplates:
+  - metadata:
+      name: db-pvc
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      resources:
+        requests:
+          storage: 1Gi
+        limits:
+          storage: 2Gi

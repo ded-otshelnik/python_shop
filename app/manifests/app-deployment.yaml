@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-app
+  namespace: python-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: shop-app
+  template:
+    metadata:
+      labels:
+        name: shop-app
+    spec:
+      # Main application container must wait for the database to be ready
+      initContainers:
+      - name: wait-for-db
+        image: busybox:1.35.0
+        command: ['sh', '-c',]
+        args: [ 'until nc -z -v -w30 db-service 5432; do echo "Waiting for database..."; sleep 5; done;']
+
+      # Main application container
+      containers:
+      - name: shop-app
+        image: shop-app:latest
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+        env:
+        - name: DJANGO_ENV
+          value: "dev"
+        envFrom:
+          - configMapRef:
+              name: dev-configmap
+        volumeMounts:
+        - name: certs-volume
+          mountPath: /certs
+        - name: static-volume
+          mountPath: /app/src/staticfiles
+      restartPolicy: Always
+      volumes:
+      - name: certs-volume
+        configMap:
+          name: shop-ca
+      - name: static-volume
+        persistentVolumeClaim:
+          claimName: shop-static-pvc

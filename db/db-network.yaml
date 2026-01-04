@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+  namespace: python-shop
+spec:
+  podSelector:
+    matchLabels:
+      name: db-service
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+          - key: name
+            operator: In
+            values:
+            - shop-app
+            - payment-app
+    ports:
+    - protocol: TCP
+      port: 5432
+  egress:
+  - to:
+    - podSelector:
+        matchExpressions:
+          - key: name
+            operator: In
+            values:
+            - shop-app
+            - payment-app

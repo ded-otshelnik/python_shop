@@ -1,11 +1,12 @@
-# API + Unfold settings
 import os
+import warnings
 from pathlib import Path
 
-from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # Application definition
 

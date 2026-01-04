@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-app
+  namespace: python-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: payment-app
+  template:
+    metadata:
+      labels:
+        name: payment-app
+    spec:
+      initContainers:
+      - name: wait-for-app
+        image: busybox:1.35.0
+        command: ['sh', '-c', 'until nc -z -v -w30 shop-app-service 8000; do echo "Waiting for shop app..."; sleep 5; done;']
+
+      containers:
+      - name: payment-app
+        image: payment-app:latest
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: shop-ca
+          mountPath: /certs
+        env:
+        - name: DJANGO_ENV
+          value: "dev"
+        envFrom:
+          - configMapRef:
+              name: payment-dev-configmap
+      restartPolicy: Always
+      volumes:
+      - name: shop-ca
+        configMap:
+          name: shop-ca

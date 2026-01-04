@@ -40,8 +40,6 @@ RUN chmod +x /entrypoint.sh
 # Switch to non-root user
 USER appuser
 
-RUN python3 src/bin/manage.py makemigrations
-
 # Expose the application port
 EXPOSE 8000
 

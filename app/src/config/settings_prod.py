@@ -10,8 +10,6 @@ env = environ.Env(
     DEBUG=(bool, False),
 )
 
-ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-
 environ.Env.read_env(os.path.join(ENV_PATH, ".env.prod"))
 
 SECRET_KEY = env("SECRET_KEY")

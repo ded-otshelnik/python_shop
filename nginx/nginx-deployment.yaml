@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-shop
+  namespace: python-shop
+spec:
+  selector:
+    matchLabels:
+      name: nginx-shop
+  template:
+    metadata:
+      labels:
+        name: nginx-shop
+    spec:
+      containers:
+      - name: nginx-shop
+        image: nginx:1.28.0-alpine
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d/
+        - name: ssl-certs
+          mountPath: /etc/nginx/certs/
+        - name: shop-static-pv
+          mountPath: /app/staticfiles/
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          name: nginx-conf
+        name: nginx-conf
+      - configMap:
+          name: shop-ca
+        name: ssl-certs
+      - name: shop-static-pv
+        persistentVolumeClaim:
+          claimName: shop-static-pvc
